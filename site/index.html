@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173f35">
+  <meta name="description" content="화서역푸르지오더에듀포레 최근 세 달 매매 실거래가. 전용면적별 거래금액과 계약 해제 내역을 확인하세요.">
+  <title>화서역푸르지오더에듀포레 · 실거래가</title>
+  <link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="eyebrow">EDUFORET <span>매매 실거래가 안내</span></div>
+    <h1>화서역푸르지오더에듀포레</h1>
+    <p class="address">수원시 장안구 화산로 85</p>
+    <div class="period"><span>최근 세 달 · 계약일 기준</span><strong id="period">조회 기간 확인 중</strong></div>
+  </header>
+  <section class="update" aria-label="자료 갱신 안내">
+    <div><span class="label">자동 갱신</span><strong>매일 08:00 · 13:00 · 18:00</strong><span class="timezone">한국시간</span></div>
+    <p id="updated">마지막 갱신 확인 중</p>
+    <p class="fine">예약 실행 상황에 따라 실제 반영 시간이 늦어질 수 있습니다.</p>
+  </section>
+  <div id="status" class="notice" role="status">거래 내역을 불러오는 중입니다.</div>
+  <aside class="notice resident-notice">본 정보는 온라인 검색 및 실거래가 확인이 어려운 화서역푸르지오더에듀포레 입주민분들의 정보 접근성 향상을 목적으로 제공됩니다.</aside>
+  <section aria-labelledby="sales-title">
+    <div class="section-title"><h2 id="sales-title">면적별 매매</h2><span>전용면적 기준</span></div>
+    <p class="legend">유사 전용면적을 묶었습니다. 건수와 가격 범위는 계약 해제를 제외합니다.</p>
+    <section class="distribution" aria-labelledby="distribution-title">
+      <h3 id="distribution-title">면적별 가격 분포</h3>
+      <p class="chart-guide">점: 거래금액 · 선: 최저~최고 · 점 안 숫자: 동일 가격 건수</p>
+      <div id="distribution-chart"></div>
+      <p id="chart-detail" class="chart-detail" role="status">점을 누르면 거래 내역을 확인할 수 있습니다.</p>
+    </section>
+    <div id="cards" aria-live="polite"></div>
+  </section>
+  <aside class="notes">
+    <h2>[ 참고사항 ]</h2>
+    <ol>
+      <li>본 자료는 국토교통부 실거래가 공개시스템에 신고된 실거래 사실을 그대로 옮긴 객관적 사실 정보입니다.</li>
+      <li>실거래가는 동, 층, 향, 내부 상태 등에 따라 차이가 발생할 수 있으며, 본 자료는 참고용 자료로 실제 거래 가격 판단 및 거래에 대한 책임은 개별 당사자에게 있습니다.</li>
+      <li>본 자료는 시세 판단이나 향후 가격 변동에 대한 예측 자료가 아닙니다.</li>
+      <li>토지거래허가 절차로 인해 최근 체결된 거래금액과 실거래가 공개 시점 사이에 차이가 발생할 수 있음을 참고 바랍니다.</li>
+    </ol>
+  </aside>
+  <footer><a href="https://rt.molit.go.kr/" target="_blank" rel="noopener noreferrer">자료 출처 · 국토교통부 실거래가 공개시스템 ↗</a><p>원본 API 갱신: 기술문서 기준 일 1회<br>입주민을 위한 비공식 실거래가 안내</p></footer>
+</main>
+<noscript>거래 내역을 보려면 브라우저에서 자바스크립트를 허용해 주세요.</noscript>
+</body>
+</html>

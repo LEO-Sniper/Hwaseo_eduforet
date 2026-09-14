@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "updatedAt": "2026-09-14T12:53:51+09:00",
+  "updatedAt": "2026-09-14T13:05:02+09:00",
   "periodStart": "2026-06-14",
   "periodEnd": "2026-09-14",
   "source": "국토교통부 아파트 매매 실거래가 자료",
@@ -13,7 +13,7 @@
       "floor": "19",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": "2026-09-14T00:00:00+09:00"
     },
     {
       "date": "2026-09-05",
@@ -23,7 +23,7 @@
       "floor": "22",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": "2026-09-14T00:00:00+09:00"
     },
     {
       "date": "2026-08-24",
@@ -33,7 +33,7 @@
       "floor": "10",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": "2026-09-14T00:00:00+09:00"
     },
     {
       "date": "2026-08-14",
@@ -43,7 +43,7 @@
       "floor": "14",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": "2026-09-14T00:00:00+09:00"
     },
     {
       "date": "2026-08-07",
@@ -190,25 +190,25 @@
     "295566f6cce8ae14942e1b743322faae3b10fd4b76a9a2b49f2f17c0fe669fe8": {
       "date": "2026-09-08",
       "firstSeen": [
-        null
+        "2026-09-14T00:00:00+09:00"
       ]
     },
     "a97f5dda8dabb3e6c3c698b0039222cb32dcfa2d0a57f70e1f10c63bc2b54a11": {
       "date": "2026-09-05",
       "firstSeen": [
-        null
+        "2026-09-14T00:00:00+09:00"
       ]
     },
     "793ecebfb3bc8e81a4cbf17ad0880a93e88b673a2a01879271e94b38ba74c892": {
       "date": "2026-08-24",
       "firstSeen": [
-        null
+        "2026-09-14T00:00:00+09:00"
       ]
     },
     "8cd1eddeecdcf24a486654a279148df5b9d1da51c582078687577d44d2d8f4f7": {
       "date": "2026-08-14",
       "firstSeen": [
-        null
+        "2026-09-14T00:00:00+09:00"
       ]
     },
     "351ea0730586e0a4c270fe35cd9a9cc3fbee6eb5dcfbfac11b9302662814ba7a": {
@@ -295,5 +295,6 @@
         null
       ]
     }
-  }
+  },
+  "launchBadgeSeeded": "2026-09-14"
 }

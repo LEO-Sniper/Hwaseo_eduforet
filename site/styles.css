@@ -9,3 +9,4 @@
 
 /* Smaller visible markers; preserve 24px tap targets. */
 .chart-point:not(:empty){background:transparent;border:0;box-shadow:none;font-size:10px}.chart-point:not(:empty)::before{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--green);border:1px solid #fff;z-index:-1}
+.new-badge{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;min-width:16px;vertical-align:middle;margin-left:4px;border-radius:50%;background:#fff0f3;color:#df527b;font:600 10px/1 sans-serif}.has-new .value{display:inline}.has-new{overflow-wrap:normal}

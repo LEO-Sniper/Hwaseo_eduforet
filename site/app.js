@@ -74,6 +74,17 @@ function renderDistribution(trades, ready) {
   groups.forEach(group=>{const label=element('div',`${group}㎡`);label.append(element('small',ready?`${active.filter(t=>t.group===group).length}건`:'대기'));axis.append(label)});
   frame.append(axis,element('p','전용면적 (㎡)','chart-x-title'));host.append(frame);
 }
+function newBadgeTrade(rows, now = new Date()) {
+  const candidates = rows.filter(t=>!t.cancelled && t.firstSeenAt && Number.isFinite(Date.parse(t.firstSeenAt)) && Date.parse(t.firstSeenAt)<=now.getTime());
+  candidates.sort((a,b)=>Date.parse(b.firstSeenAt)-Date.parse(a.firstSeenAt) || b.date.localeCompare(a.date) || b.price-a.price);
+  const newest=candidates[0];
+  if(!newest)return null;
+  const first=kstDate(new Date(newest.firstSeenAt));
+  const [year,month,day]=first.split('-').map(Number);
+  const lastDay=new Date(Date.UTC(year,month+1,0)).getUTCDate();
+  const expiry=new Date(Date.UTC(year,month,Math.min(day,lastDay))).toISOString().slice(0,10);
+  return kstDate(now)<expiry ? newest : null;
+}
 function render(data) {
   const end = kstDate(), start = startDate(end);
   $('period').textContent = `${start.replaceAll('-','.')} — ${end.replaceAll('-','.')}`;
@@ -83,6 +94,7 @@ function render(data) {
   $('cards').replaceChildren();
   groups.forEach((group,index)=>{
     const rows = trades.filter(t=>t.group===group), active=rows.filter(t=>!t.cancelled), cancelled=rows.length-active.length;
+    const newest=newBadgeTrade(rows);
     const card=element('article',undefined,'card');card.style.setProperty('--tint',tints[index]);
     const head=element('div',undefined,'card-head'), top=element('div',undefined,'card-top');
     const title=element('h3',undefined,'area');title.append(element('small','전용 '),document.createTextNode(`${group}㎡`));
@@ -100,6 +112,12 @@ function render(data) {
         const r=element('tr',undefined,t.cancelled?'cancelled':'');
         [t.date.slice(5).replace('-','.'),t.area,money(t.price),t.floor===null?'—':`${t.floor}층`].forEach((value,i)=>{
           const td=element('td');td.append(element('span',value,'value'));
+          if(i===2 && t===newest){
+            const badge=element('span','N','new-badge');
+            badge.setAttribute('aria-label','새로 확인된 거래');
+            badge.title='최근 한 달 내 새로 확인된 거래';
+            td.classList.add('has-new');td.append(badge);
+          }
           if(i===2&&t.cancelled){td.append(element('span','계약 해제','cancel-label'));if(t.cancellationDate)td.append(element('span',cancelDate(t.cancellationDate),'cancel-label'))}
           r.append(td);
         });tbody.append(r);

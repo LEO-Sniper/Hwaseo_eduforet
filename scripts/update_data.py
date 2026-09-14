@@ -1,5 +1,6 @@
 """Fetch official monthly snapshots. No third-party Python dependencies."""
 import calendar
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -117,6 +118,35 @@ def transform(rows, today):
     return sorted(result, key=lambda x: (x['date'], x['price'], x['area']), reverse=True)
 
 
+def trade_key(trade):
+    # Cancellation is a change to a transaction, not a new transaction.
+    fields = [trade['date'], str(Decimal(trade['area']).normalize()),
+              trade['price'], str(trade.get('floor')), trade['group']]
+    return hashlib.sha256(json.dumps(fields, ensure_ascii=False).encode()).hexdigest()
+
+
+def track_first_seen(trades, previous, now):
+    history = previous.get('seenTrades', {})
+    # Existing snapshots establish a baseline; do not guess historical arrival dates.
+    if not history:
+        for old in previous.get('trades', []):
+            key = trade_key(old)
+            entry = history.setdefault(key, {'date': old['date'], 'firstSeen': []})
+            entry['firstSeen'].append(old.get('firstSeenAt'))
+    counts = {}
+    initialized = previous.get('status') == 'ready'
+    for trade in trades:
+        key = trade_key(trade)
+        index = counts.get(key, 0)
+        counts[key] = index + 1
+        entry = history.setdefault(key, {'date': trade['date'], 'firstSeen': []})
+        if index >= len(entry['firstSeen']):
+            entry['firstSeen'].append(now.isoformat(timespec='seconds') if initialized else None)
+        trade['firstSeenAt'] = entry['firstSeen'][index]
+    start = three_months_before(now.date()).isoformat()
+    return {key: entry for key, entry in history.items() if entry['date'] >= start}
+
+
 def main():
     key = os.environ.get('MOLIT_API_KEY', '').strip()
     if not key:
@@ -127,10 +157,12 @@ def main():
     for month in months_between(three_months_before(today), today):
         rows.extend(fetch_month(key, month))
     trades = transform(rows, today)
+    target = ROOT / 'site/data/trades.json'
+    previous = json.loads(target.read_text(encoding='utf-8')) if target.exists() else {}
+    history = track_first_seen(trades, previous, now)
     payload = dict(status='ready', updatedAt=now.isoformat(timespec='seconds'),
                    periodStart=three_months_before(today).isoformat(), periodEnd=today.isoformat(),
-                   source='국토교통부 아파트 매매 실거래가 자료', trades=trades)
-    target = ROOT / 'site/data/trades.json'
+                   source='국토교통부 아파트 매매 실거래가 자료', trades=trades, seenTrades=history)
     temp = target.with_suffix('.tmp')
     temp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     temp.replace(target)  # Only replace after every month and page succeeds.

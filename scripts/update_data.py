@@ -147,6 +147,22 @@ def track_first_seen(trades, previous, now):
     return {key: entry for key, entry in history.items() if entry['date'] >= start}
 
 
+def apply_launch_badges(trades, history, previous):
+    """One-time opening promotion; never pretend this is an actual arrival timestamp."""
+    if previous.get('launchBadgeSeeded') == '2026-09-14':
+        return
+    launch = '2026-09-14T00:00:00+09:00'
+    for entry in history.values():
+        if '2026-08-14' <= entry['date'] <= '2026-09-14':
+            entry['firstSeen'] = [stamp if stamp is not None else launch for stamp in entry['firstSeen']]
+    counts = {}
+    for trade in trades:
+        key = trade_key(trade)
+        index = counts.get(key, 0)
+        counts[key] = index + 1
+        trade['firstSeenAt'] = history[key]['firstSeen'][index]
+
+
 def main():
     key = os.environ.get('MOLIT_API_KEY', '').strip()
     if not key:
@@ -160,9 +176,11 @@ def main():
     target = ROOT / 'site/data/trades.json'
     previous = json.loads(target.read_text(encoding='utf-8')) if target.exists() else {}
     history = track_first_seen(trades, previous, now)
+    apply_launch_badges(trades, history, previous)
     payload = dict(status='ready', updatedAt=now.isoformat(timespec='seconds'),
                    periodStart=three_months_before(today).isoformat(), periodEnd=today.isoformat(),
-                   source='국토교통부 아파트 매매 실거래가 자료', trades=trades, seenTrades=history)
+                   source='국토교통부 아파트 매매 실거래가 자료', trades=trades, seenTrades=history,
+                   launchBadgeSeeded='2026-09-14')
     temp = target.with_suffix('.tmp')
     temp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     temp.replace(target)  # Only replace after every month and page succeeds.

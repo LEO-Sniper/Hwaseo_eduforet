@@ -27,3 +27,20 @@ class NewTradeTests(unittest.TestCase):
         duplicates=[copy.deepcopy(t),copy.deepcopy(t)];u.track_first_seen(duplicates,{'status':'ready','trades':rows,'seenTrades':h},now)
         self.assertIsNone(duplicates[0]['firstSeenAt'])
         self.assertIsNotNone(duplicates[1]['firstSeenAt'])
+
+class LaunchBadgeTests(unittest.TestCase):
+    def test_launch_window_and_no_reseed(self):
+        now=datetime(2026,9,14,8,tzinfo=u.KST)
+        def trade(day):return dict(date=day,area='84.79',price=74500,group=84,floor='7',cancelled=False)
+        rows=[trade(day) for day in ['2026-08-13','2026-08-14','2026-09-05','2026-09-14']]
+        history=u.track_first_seen(rows,{},now)
+        u.apply_launch_badges(rows,history,{})
+        self.assertIsNone(rows[0]['firstSeenAt'])
+        self.assertTrue(all(t['firstSeenAt']=='2026-09-14T00:00:00+09:00' for t in rows[1:]))
+        previous={'status':'ready','trades':copy.deepcopy(rows),'seenTrades':history,'launchBadgeSeeded':'2026-09-14'}
+        later=datetime(2026,9,16,8,tzinfo=u.KST)
+        next_rows=copy.deepcopy(rows)+[trade('2026-08-20')]
+        history=u.track_first_seen(next_rows,previous,later)
+        u.apply_launch_badges(next_rows,history,previous)
+        self.assertEqual(next_rows[1]['firstSeenAt'],'2026-09-14T00:00:00+09:00')
+        self.assertEqual(next_rows[-1]['firstSeenAt'],later.isoformat(timespec='seconds'))

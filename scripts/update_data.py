@@ -11,6 +11,7 @@ from datetime import date, datetime
 from decimal import Decimal
 from urllib.parse import urlencode, unquote
 from urllib.request import urlopen
+from urllib.error import HTTPError, URLError
 import xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
 
@@ -67,16 +68,104 @@ def fetch_month(key, month, request=None):
         page += 1
 
 
+
 def request_bytes(url):
     for attempt in range(3):
         try:
+            print(
+                f'API 요청 시작: {attempt + 1}/3',
+                flush=True
+            )
+
             with urlopen(url, timeout=40) as response:
-                return response.read()
-        except Exception:
+                data = response.read()
+
+                print(
+                    f'API HTTP 상태: {response.status}',
+                    flush=True
+                )
+
+                return data
+
+        except HTTPError as exc:
+            status = exc.code
+
+            # API 응답 본문에서 오류 코드만 추출합니다.
+            # 인증키가 포함될 수 있는 URL과
+            # 응답 원문은 출력하지 않습니다.
+            api_code = None
+
+            try:
+                body = exc.read(4096)
+                root = ET.fromstring(body)
+
+                code = (
+                    root.findtext('.//resultCode')
+                    or root.findtext('.//returnReasonCode')
+                )
+
+                if code and re.fullmatch(
+                    r'[A-Za-z0-9_-]{1,32}', code
+                ):
+                    api_code = code
+
+            except (ET.ParseError, ValueError):
+                pass
+
+            print(
+                f'API HTTP 오류: {status}',
+                flush=True
+            )
+
+            if api_code:
+                print(
+                    f'API 응답 오류 코드: {api_code}',
+                    flush=True
+                )
+
+            # 일시적인 서버 오류 또는 요청 제한일 때만 재시도
+            if status in (429, 500, 502, 503, 504):
+                if attempt < 2:
+                    time.sleep(2 * (attempt + 1))
+                    continue
+
+            raise RuntimeError(
+                f'API HTTP 오류로 갱신 실패: {status}'
+            ) from None
+
+        except (URLError, TimeoutError) as exc:
+            reason = getattr(exc, 'reason', exc)
+
+            if isinstance(reason, TimeoutError):
+                error_type = '연결 시간 초과'
+            else:
+                error_type = '네트워크 연결 오류'
+
+            print(
+                f'API {error_type}: {attempt + 1}/3',
+                flush=True
+            )
+
             if attempt == 2:
-                # Never log request URLs or exceptions containing serviceKey.
-                raise RuntimeError('API 연결 실패: 인증 상태 또는 서비스 상태를 확인하세요.') from None
+                raise RuntimeError(
+                    f'API {error_type}: 기존 자료를 유지합니다.'
+                ) from None
+
             time.sleep(2 * (attempt + 1))
+
+        except Exception as exc:
+            # 예기치 못한 오류도 URL이나 인증키 없이
+            # 예외 유형만 안전하게 기록합니다.
+            error_type = type(exc).__name__
+
+            print(
+                f'API 요청 예외 유형: {error_type}',
+                flush=True
+            )
+
+            raise RuntimeError(
+                'API 요청 처리 오류: 기존 자료를 유지합니다.'
+            ) from None
 
 
 def is_target(row):

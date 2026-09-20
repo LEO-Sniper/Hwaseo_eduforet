@@ -1,6 +1,6 @@
 {
   "status": "ready",
-  "updatedAt": "2026-09-20T08:07:50+09:00",
+  "updatedAt": "2026-09-20T23:52:24+09:00",
   "periodStart": "2026-06-20",
   "periodEnd": "2026-09-20",
   "source": "국토교통부 아파트 매매 실거래가 자료",
@@ -13,7 +13,8 @@
       "floor": "19",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": "2026-09-14T00:00:00+09:00"
+      "firstSeenAt": "2026-09-14T00:00:00+09:00",
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-09-05",
@@ -23,7 +24,8 @@
       "floor": "22",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": "2026-09-14T00:00:00+09:00"
+      "firstSeenAt": "2026-09-14T00:00:00+09:00",
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-08-29",
@@ -33,7 +35,8 @@
       "floor": "2",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": "2026-09-15T08:08:59+09:00"
+      "firstSeenAt": "2026-09-15T08:08:59+09:00",
+      "registeredAt": "2026-09-15T08:08:59+09:00"
     },
     {
       "date": "2026-08-26",
@@ -43,7 +46,8 @@
       "floor": "7",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": "2026-09-18T08:07:42+09:00"
+      "firstSeenAt": "2026-09-18T08:07:42+09:00",
+      "registeredAt": "2026-09-18T08:07:42+09:00"
     },
     {
       "date": "2026-08-24",
@@ -53,7 +57,8 @@
       "floor": "10",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": "2026-09-14T00:00:00+09:00"
+      "firstSeenAt": "2026-09-14T00:00:00+09:00",
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-08-14",
@@ -63,7 +68,8 @@
       "floor": "14",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": "2026-09-14T00:00:00+09:00"
+      "firstSeenAt": "2026-09-14T00:00:00+09:00",
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-08-07",
@@ -73,7 +79,8 @@
       "floor": "8",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-08-07",
@@ -83,7 +90,8 @@
       "floor": "7",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-08-06",
@@ -93,7 +101,8 @@
       "floor": "25",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-21",
@@ -103,7 +112,8 @@
       "floor": "3",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-10",
@@ -113,7 +123,8 @@
       "floor": "19",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-10",
@@ -123,7 +134,8 @@
       "floor": "19",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-10",
@@ -133,7 +145,8 @@
       "floor": "3",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-08",
@@ -143,7 +156,8 @@
       "floor": "16",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-06",
@@ -153,7 +167,8 @@
       "floor": "17",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-06",
@@ -163,7 +178,8 @@
       "floor": "7",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-06",
@@ -173,7 +189,8 @@
       "floor": "8",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     },
     {
       "date": "2026-07-04",
@@ -183,7 +200,8 @@
       "floor": "2",
       "cancelled": false,
       "cancellationDate": null,
-      "firstSeenAt": null
+      "firstSeenAt": null,
+      "registeredAt": "2026-09-14T11:33:36+09:00"
     }
   ],
   "seenTrades": {
@@ -191,107 +209,161 @@
       "date": "2026-09-08",
       "firstSeen": [
         "2026-09-14T00:00:00+09:00"
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "a97f5dda8dabb3e6c3c698b0039222cb32dcfa2d0a57f70e1f10c63bc2b54a11": {
       "date": "2026-09-05",
       "firstSeen": [
         "2026-09-14T00:00:00+09:00"
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "793ecebfb3bc8e81a4cbf17ad0880a93e88b673a2a01879271e94b38ba74c892": {
       "date": "2026-08-24",
       "firstSeen": [
         "2026-09-14T00:00:00+09:00"
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "8cd1eddeecdcf24a486654a279148df5b9d1da51c582078687577d44d2d8f4f7": {
       "date": "2026-08-14",
       "firstSeen": [
         "2026-09-14T00:00:00+09:00"
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "351ea0730586e0a4c270fe35cd9a9cc3fbee6eb5dcfbfac11b9302662814ba7a": {
       "date": "2026-08-07",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "e5e0c09bf24f672663a337812917ded90a58cb2f74ddf6ea3357f2d9361cf5e3": {
       "date": "2026-08-07",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "59f73d9bd812e3a761e1d9e2caf6ed8c08ec0cb7252fbb0d37d234a755075397": {
       "date": "2026-08-06",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "3a5229e080e644796aec7116f982fc7ba83c8abdf4ea48f9631382b1a2c3bdf7": {
       "date": "2026-07-21",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "f6cff666ea7dd3109b5f4132a0707f7b656de37ed9ece9850cc77f6c0fdc4726": {
       "date": "2026-07-10",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "5ec4835dee2b6e3b6318a2b9b8d6b8b3aac05ef039e072116263636c6f34d00c": {
       "date": "2026-07-10",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "738378288c9ee5bd17e2abd49bfe80f41d41c9c4914f1b391d7be5e08642af75": {
       "date": "2026-07-10",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "14d7c82c03f002e3412087677f7bc07f3b14b03037015ec09d53acdcca90604f": {
       "date": "2026-07-08",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "6aef2b9f4f3583bedba519e303dc7ba1af2b1ae9af623e0112929ab4a0346137": {
       "date": "2026-07-06",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "23f240d0ac650c4bd84fa968d378a0e11e9b7418bcaa00cd11d1c813c98128ab": {
       "date": "2026-07-06",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "1d5b54799ab591a0a21952b800334476233856b8a7bd4db9d2d3d2704ac65b10": {
       "date": "2026-07-06",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "dbedb55b712f70cdca01eab07d891e06ff11a8cc3170f1f5f36306c69dc94b1f": {
       "date": "2026-07-04",
       "firstSeen": [
         null
+      ],
+      "registered": [
+        "2026-09-14T11:33:36+09:00"
       ]
     },
     "9e6af53576d50cbfa33a0dc4227289b19d676dc09110cb17e9e673082ee2f555": {
       "date": "2026-08-29",
       "firstSeen": [
         "2026-09-15T08:08:59+09:00"
+      ],
+      "registered": [
+        "2026-09-15T08:08:59+09:00"
       ]
     },
     "b8af7df6f798c2ca88dd4397ba613d1d28b2fd83b13ffdb77242479a494eb6c1": {
       "date": "2026-08-26",
       "firstSeen": [
+        "2026-09-18T08:07:42+09:00"
+      ],
+      "registered": [
         "2026-09-18T08:07:42+09:00"
       ]
     }

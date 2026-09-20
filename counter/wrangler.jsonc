@@ -1,0 +1,9 @@
+{
+  "name": "eduforet-visitors",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "vars": { "ALLOWED_ORIGIN": "https://leo-sniper.github.io" },
+  "durable_objects": { "bindings": [{"name":"VISITORS","class_name":"VisitorCounter"}] },
+  "migrations": [{"tag":"v1","new_sqlite_classes":["VisitorCounter"]}]
+}

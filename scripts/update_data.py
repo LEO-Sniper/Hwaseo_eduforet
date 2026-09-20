@@ -252,6 +252,23 @@ def apply_launch_badges(trades, history, previous):
         trade['firstSeenAt'] = history[key]['firstSeen'][index]
 
 
+def track_registration(trades, history, backfill):
+    """Site first-observed date, independent of artificial opening-day N badges."""
+    launch = '2026-09-14T00:00:00+09:00'
+    for key, entry in history.items():
+        known = entry.setdefault('registered', [])
+        for index in range(len(known), len(entry['firstSeen'])):
+            recovered = backfill.get(key, [])
+            stamp = entry['firstSeen'][index]
+            known.append(recovered[index] if index < len(recovered) else stamp if stamp != launch else None)
+    counts = {}
+    for trade in trades:
+        key = trade_key(trade)
+        index = counts.get(key, 0)
+        counts[key] = index + 1
+        trade['registeredAt'] = history[key]['registered'][index]
+
+
 def main():
     key = os.environ.get('MOLIT_API_KEY', '').strip()
     if not key:
@@ -266,6 +283,9 @@ def main():
     previous = json.loads(target.read_text(encoding='utf-8')) if target.exists() else {}
     history = track_first_seen(trades, previous, now)
     apply_launch_badges(trades, history, previous)
+    backfill_path = ROOT / 'scripts/registration_backfill.json'
+    backfill = json.loads(backfill_path.read_text(encoding='utf-8'))['records'] if backfill_path.exists() else {}
+    track_registration(trades, history, backfill)
     payload = dict(status='ready', updatedAt=now.isoformat(timespec='seconds'),
                    periodStart=three_months_before(today).isoformat(), periodEnd=today.isoformat(),
                    source='국토교통부 아파트 매매 실거래가 자료', trades=trades, seenTrades=history,

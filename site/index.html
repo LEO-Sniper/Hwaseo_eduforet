@@ -6,11 +6,18 @@
   <meta name="description" content="화서역푸르지오더에듀포레 최근 세 달 매매 실거래가. 전용면적별 거래금액과 계약 해제 내역을 확인하세요.">
   <title>화서역푸르지오더에듀포레 · 실거래가</title>
   <link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+  <script src="visitors.js" defer></script>
 </head>
 <body>
 <main>
   <header class="hero">
-    <div class="eyebrow">EDUFORET <span>매매 실거래가 안내</span></div>
+    <div class="hero-top"><div class="eyebrow" style="display:block">EDUFORET<div style="letter-spacing:0">매매 실거래가 안내</div></div>
+      <div class="visitor-counts" id="visitor-counts" title="동일 브라우저는 한국시간 하루 1회 집계합니다. 누적은 일별 방문 수의 합계입니다.">
+        <div>누적 방문자 <strong id="visitors-total">—</strong></div>
+        <div>일일 방문자 <strong id="visitors-today">—</strong></div>
+        <span id="visitor-status" class="visitor-status">집계 연결 대기</span>
+      </div>
+    </div>
     <h1>화서역푸르지오더에듀포레</h1>
     <p class="address">수원시 장안구 화산로 85</p>
     <div class="period"><span>최근 세 달 · 계약일 기준</span><strong id="period">조회 기간 확인 중</strong></div>
@@ -25,6 +32,7 @@
   <section aria-labelledby="sales-title">
     <div class="section-title"><h2 id="sales-title">면적별 매매</h2><span>전용면적 기준</span></div>
     <p class="legend">유사 전용면적을 묶었습니다. 건수와 가격 범위는 계약 해제를 제외합니다.</p>
+    <p class="registration-note">등록일은 이 사이트에 거래가 처음 반영된 날짜입니다. 확인 기록이 없으면 —로 표시합니다.</p>
     <section class="distribution" aria-labelledby="distribution-title">
       <h3 id="distribution-title">면적별 가격 분포</h3>
       <p class="chart-guide">점: 거래금액 · 선: 최저~최고 · 점 안 숫자: 동일 가격 건수</p>

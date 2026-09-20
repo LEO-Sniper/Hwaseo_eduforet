@@ -105,20 +105,22 @@ function render(data) {
     head.append(element('p',!ready?'자료 연결 대기':prices.length ? (Math.min(...prices)===Math.max(...prices)?money(prices[0]):`${money(Math.min(...prices))} ~ ${money(Math.max(...prices))}`):'거래없음','range'));card.append(head);
     if(rows.length){
       const table=element('table');table.setAttribute('aria-label',`전용 ${group}제곱미터 매매 내역`);
-      const tr=element('tr');['계약일','전용㎡','거래금액','층'].forEach(label=>{const th=element('th',label);th.scope='col';tr.append(th)});
+      const tr=element('tr');['계약일','등록일','전용㎡','거래금액','층'].forEach(label=>{const th=element('th',label);th.scope='col';tr.append(th)});
       const thead=element('thead');thead.append(tr);table.append(thead);
       const tbody=element('tbody');
       rows.forEach(t=>{
         const r=element('tr',undefined,t.cancelled?'cancelled':'');
-        [t.date.slice(5).replace('-','.'),t.area,money(t.price),t.floor===null?'—':`${t.floor}층`].forEach((value,i)=>{
+        const registered=t.registeredAt && Number.isFinite(Date.parse(t.registeredAt)) ? kstDate(new Date(t.registeredAt)) : null;
+        [t.date.slice(5).replace('-','.'),registered?registered.slice(5).replace('-','.'):'—',t.area,money(t.price),t.floor===null?'—':`${t.floor}층`].forEach((value,i)=>{
           const td=element('td');td.append(element('span',value,'value'));
-          if(i===2 && t===newest){
+          if(i===1)td.title=registered?`사이트 최초 반영: ${registered}`:'최초 반영일 확인 기록 없음';
+          if(i===3 && t===newest){
             const badge=element('span','N','new-badge');
             badge.setAttribute('aria-label','새로 확인된 거래');
             badge.title='최근 한 달 내 새로 확인된 거래';
             td.classList.add('has-new');td.append(badge);
           }
-          if(i===2&&t.cancelled){td.append(element('span','계약 해제','cancel-label'));if(t.cancellationDate)td.append(element('span',cancelDate(t.cancellationDate),'cancel-label'))}
+          if(i===3&&t.cancelled){td.append(element('span','계약 해제','cancel-label'));if(t.cancellationDate)td.append(element('span',cancelDate(t.cancellationDate),'cancel-label'))}
           r.append(td);
         });tbody.append(r);
       });table.append(tbody);card.append(table);

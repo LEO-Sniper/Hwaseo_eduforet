@@ -7,6 +7,10 @@
   <title>화서역푸르지오더에듀포레 · 실거래가</title>
   <link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
   <script src="visitors.js" defer></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="push-icon-192.png">
+  <link rel="stylesheet" href="push.css">
+  <script src="push.js" defer></script>
 </head>
 <body>
 <main>
@@ -18,7 +22,12 @@
         <span id="visitor-status" class="visitor-status">집계 연결 대기</span>
       </div>
     </div>
-    <h1>화서역푸르지오더에듀포레</h1>
+    <div class="hero-title"><div class="title-name"><h1>화서역푸르지오더에듀포레</h1></div>
+      <button id="push-toggle" class="push-toggle" type="button" aria-label="신규 실거래가 알림 신청" aria-pressed="false" title="신규 실거래가 알림 신청">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+      </button>
+    </div>
+    <p id="push-message" class="push-message" role="status" aria-live="polite" hidden></p>
     <p class="address">수원시 장안구 화산로 85</p>
     <div class="period"><span>최근 세 달 · 계약일 기준</span><strong id="period">조회 기간 확인 중</strong></div>
   </header>

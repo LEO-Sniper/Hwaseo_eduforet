@@ -1,0 +1,30 @@
+name: Deploy push notifications
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'push/**'
+      - '.github/workflows/deploy-push.yml'
+permissions:
+  contents: read
+concurrency:
+  group: eduforet-push-deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify push notification logic
+        run: node --test push/test.mjs push/browser-test.mjs push/worker-test.mjs
+      - name: Deploy push notifications
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config push/wrangler.jsonc

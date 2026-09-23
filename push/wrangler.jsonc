@@ -1,0 +1,13 @@
+{
+  "name": "eduforet-push",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGIN": "https://leo-sniper.github.io",
+    "SITE_URL": "https://leo-sniper.github.io/Hwaseo_eduforet/"
+  },
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "durable_objects": { "bindings": [{"name":"PUSH","class_name":"PushRegistry"}] },
+  "migrations": [{"tag":"v1","new_sqlite_classes":["PushRegistry"]}]
+}

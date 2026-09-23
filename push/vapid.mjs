@@ -34,7 +34,7 @@ export async function proofFor(auth) {
   return encode64(await crypto.subtle.digest('SHA-256',encoder.encode(auth)));
 }
 export async function sendPush(endpoint,keys,subject,request=fetch) {
-  const response=await request(endpoint,{method:'POST',redirect:'error',signal:AbortSignal.timeout(12000),
+  const response=await request(endpoint,{method:'POST',redirect:'manual',signal:AbortSignal.timeout(12000),
     headers:{Authorization:await authorization(endpoint,keys,subject),TTL:'86400',Urgency:'normal',Topic:'eduforet-new-trades'}});
   await response.body?.cancel();
   return response.status;

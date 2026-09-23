@@ -20,6 +20,7 @@ test('Worker routes, durable initialization, scheduled polling, delivery, and un
   const t={date:'2026-09-20',area:'84.89',price:92000,group:84,floor:'10',cancelled:false};
   let snapshot={status:'ready',updatedAt:'2026-09-23T08:00:00+09:00',trades:[t]};
   globalThis.fetch=async(url,options)=>{
+    assert.equal(options.redirect,'manual','Cloudflare supports manual/follow, not error');
     if(String(url).startsWith(env.SITE_URL))return Response.json(snapshot);
     sent.push({url,options});return new Response(null,{status:201});
   };

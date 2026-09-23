@@ -3,6 +3,7 @@
   "main": "worker.mjs",
   "compatibility_date": "2026-09-01",
   "workers_dev": true,
+  "observability": {"enabled":true,"logs":{"enabled":true,"invocation_logs":true}},
   "vars": {
     "ALLOWED_ORIGIN": "https://leo-sniper.github.io",
     "SITE_URL": "https://leo-sniper.github.io/Hwaseo_eduforet/"

@@ -70,7 +70,7 @@ test('VAPID token is a valid ES256 signature with correct audience and expiry',a
   const publicKey=await crypto.subtle.importKey('raw',decode64(keys.publicKey),{name:'ECDSA',namedCurve:'P-256'},false,['verify']);
   assert.equal(await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},publicKey,decode64(s),new TextEncoder().encode(h+'.'+b)),true);
   const status=await sendPush(endpoint,keys,'https://leo-sniper.github.io/',async(url,opts)=>{
-    assert.equal(url,endpoint);assert.equal(opts.redirect,'error');assert.equal(opts.headers.TTL,'86400');assert.equal(opts.body,undefined);return new Response(null,{status:201});
+    assert.equal(url,endpoint);assert.equal(opts.redirect,'manual');assert.equal(opts.headers.TTL,'86400');assert.equal(opts.body,undefined);return new Response(null,{status:201});
   });assert.equal(status,201);
 });
 test('endpoint validation blocks SSRF, hostile suffixes, credentials, and ports',async()=>{

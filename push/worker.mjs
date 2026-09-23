@@ -2,6 +2,15 @@ import {DurableObject} from 'cloudflare:workers';
 import {initDatabase,readMeta,writeMeta,applySnapshot,addSubscription,removeSubscription,deliveryResult} from './core.mjs';
 import {generateKeys,validateSubscription,proofFor,sendPush} from './vapid.mjs';
 
+function logFailure(stage,error) {
+  // Keep operational errors, but never log request bodies, subscription URLs or keys.
+  const detail=String(error?.message||'Unknown error')
+    .replace(/https?:\/\/[^\s"'<>]+/g,'[url]')
+    .replace(/[A-Za-z0-9_+\/=-]{40,}/g,'[redacted]').slice(0,400);
+  console.error(JSON.stringify({event:'push_error',stage,name:error?.name||'Error',detail}));
+}
+
+
 export class PushRegistry extends DurableObject {
   constructor(ctx,env) {
     super(ctx,env); this.syncing=null;
@@ -15,14 +24,14 @@ export class PushRegistry extends DurableObject {
   config() {return {publicKey:this.keys.publicKey};}
   async sync() {
     if (this.syncing) return this.syncing;
-    this.syncing=this.refresh().finally(()=>{this.syncing=null;});
+    this.syncing=this.refresh().catch(error=>{logFailure('snapshot_sync',error);throw error;}).finally(()=>{this.syncing=null;});
     return this.syncing;
   }
   async refresh() {
     const url=new URL('data/trades.json',this.env.SITE_URL);
     url.searchParams.set('push_check',String(Math.floor(Date.now()/300000)));
-    const response=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(15000),headers:{'Accept':'application/json','Cache-Control':'no-cache'}});
-    if (!response.ok) throw new Error('Published snapshot unavailable');
+    const response=await fetch(url,{redirect:'manual',signal:AbortSignal.timeout(15000),headers:{'Accept':'application/json','Cache-Control':'no-cache'}});
+    if (!response.ok) throw new Error('Published snapshot HTTP '+response.status);
     const text=await response.text();
     if (text.length>2000000) throw new Error('Snapshot too large');
     // Arm the alarm BEFORE the atomic outbox write so a process crash cannot strand it.
@@ -58,7 +67,7 @@ export class PushRegistry extends DurableObject {
         sql.exec('DELETE FROM deliveries WHERE endpoint=?',row.endpoint);return;
       }
       let status=0;
-      try {status=await sendPush(row.endpoint,this.keys,this.env.SITE_URL);} catch { /* Retry without logging subscription endpoints. */ }
+      try {status=await sendPush(row.endpoint,this.keys,this.env.SITE_URL);} catch(error) {logFailure('push_delivery',error);}
       deliveryResult(sql,row,status);
       console.log(JSON.stringify({event:'push',status}));
     }));
@@ -92,6 +101,9 @@ export default {
       let body;try {body=JSON.parse(new TextDecoder().decode(bytes));validateSubscription(body);}catch{return new Response('Invalid subscription',{status:400,headers});}
       const result=path==='/subscribe'?await registry.subscribe(body):path==='/unsubscribe'?await registry.unsubscribe(body):await registry.status(body);
       return Response.json(result,{headers});
-    } catch {return Response.json({error:'알림 서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.'},{status:503,headers});}
+    } catch(error) {
+      logFailure(path.slice(1),error);
+      return Response.json({error:'알림 서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.',code:'PUSH_'+path.slice(1).toUpperCase()+'_FAILED'},{status:503,headers});
+    }
   }
 };

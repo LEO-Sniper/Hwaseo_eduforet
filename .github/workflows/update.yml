@@ -2,7 +2,7 @@ name: Update and publish
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 23 * * *' # UTC 23:00 -> Korea 08:00 (next day), once daily
+    - cron: '0 22 * * *' # UTC 22:00 -> Korea 07:00 (next day), once daily
   push:
     branches: [main]
 permissions:

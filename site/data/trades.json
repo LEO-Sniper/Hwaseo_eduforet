@@ -1,8 +1,8 @@
 {
   "status": "ready",
-  "updatedAt": "2026-10-06T07:09:00+09:00",
-  "periodStart": "2026-07-06",
-  "periodEnd": "2026-10-06",
+  "updatedAt": "2026-10-07T07:08:32+09:00",
+  "periodStart": "2026-07-07",
+  "periodEnd": "2026-10-07",
   "source": "국토교통부 아파트 매매 실거래가 자료",
   "trades": [
     {
@@ -224,39 +224,6 @@
       "cancellationDate": null,
       "firstSeenAt": null,
       "registeredAt": "2026-09-14T11:33:36+09:00"
-    },
-    {
-      "date": "2026-07-06",
-      "area": "84.92",
-      "group": 84,
-      "price": 89000,
-      "floor": "17",
-      "cancelled": false,
-      "cancellationDate": null,
-      "firstSeenAt": null,
-      "registeredAt": "2026-09-14T11:33:36+09:00"
-    },
-    {
-      "date": "2026-07-06",
-      "area": "84.79",
-      "group": 84,
-      "price": 83500,
-      "floor": "7",
-      "cancelled": false,
-      "cancellationDate": null,
-      "firstSeenAt": null,
-      "registeredAt": "2026-09-14T11:33:36+09:00"
-    },
-    {
-      "date": "2026-07-06",
-      "area": "59.98",
-      "group": 59,
-      "price": 73000,
-      "floor": "8",
-      "cancelled": false,
-      "cancellationDate": null,
-      "firstSeenAt": null,
-      "registeredAt": "2026-09-14T11:33:36+09:00"
     }
   ],
   "seenTrades": {
@@ -361,33 +328,6 @@
     },
     "14d7c82c03f002e3412087677f7bc07f3b14b03037015ec09d53acdcca90604f": {
       "date": "2026-07-08",
-      "firstSeen": [
-        null
-      ],
-      "registered": [
-        "2026-09-14T11:33:36+09:00"
-      ]
-    },
-    "6aef2b9f4f3583bedba519e303dc7ba1af2b1ae9af623e0112929ab4a0346137": {
-      "date": "2026-07-06",
-      "firstSeen": [
-        null
-      ],
-      "registered": [
-        "2026-09-14T11:33:36+09:00"
-      ]
-    },
-    "23f240d0ac650c4bd84fa968d378a0e11e9b7418bcaa00cd11d1c813c98128ab": {
-      "date": "2026-07-06",
-      "firstSeen": [
-        null
-      ],
-      "registered": [
-        "2026-09-14T11:33:36+09:00"
-      ]
-    },
-    "1d5b54799ab591a0a21952b800334476233856b8a7bd4db9d2d3d2704ac65b10": {
-      "date": "2026-07-06",
       "firstSeen": [
         null
       ],

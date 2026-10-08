@@ -1,8 +1,8 @@
 {
   "status": "ready",
-  "updatedAt": "2026-10-08T07:08:13+09:00",
-  "periodStart": "2026-07-08",
-  "periodEnd": "2026-10-08",
+  "updatedAt": "2026-10-09T07:09:37+09:00",
+  "periodStart": "2026-07-09",
+  "periodEnd": "2026-10-09",
   "source": "국토교통부 아파트 매매 실거래가 자료",
   "trades": [
     {
@@ -213,17 +213,6 @@
       "cancellationDate": null,
       "firstSeenAt": null,
       "registeredAt": "2026-09-14T11:33:36+09:00"
-    },
-    {
-      "date": "2026-07-08",
-      "area": "129.59",
-      "group": 129,
-      "price": 89000,
-      "floor": "16",
-      "cancelled": false,
-      "cancellationDate": null,
-      "firstSeenAt": null,
-      "registeredAt": "2026-09-14T11:33:36+09:00"
     }
   ],
   "seenTrades": {
@@ -319,15 +308,6 @@
     },
     "738378288c9ee5bd17e2abd49bfe80f41d41c9c4914f1b391d7be5e08642af75": {
       "date": "2026-07-10",
-      "firstSeen": [
-        null
-      ],
-      "registered": [
-        "2026-09-14T11:33:36+09:00"
-      ]
-    },
-    "14d7c82c03f002e3412087677f7bc07f3b14b03037015ec09d53acdcca90604f": {
-      "date": "2026-07-08",
       "firstSeen": [
         null
       ],
